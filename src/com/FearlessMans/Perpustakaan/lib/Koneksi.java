@@ -13,7 +13,7 @@ import java.sql.SQLException;
  *
  * @author Ojan
  */
-public class connectionClass {
+public class Koneksi {
     private static Connection koneksi;
     public static void buka_koneksi(){
         if (koneksi == null){
