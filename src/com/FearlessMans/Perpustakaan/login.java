@@ -1,4 +1,5 @@
 package com.FearlessMans.Perpustakaan;
+import com.FearlessMans.Perpustakaan.lib.UserJavaToDatabase;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -43,6 +44,12 @@ public class login extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         okButton.setText("OK");
+        okButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                okButtonActionPerformed(evt);
+            }
+        });
+        okButton.setEnabled(false);
 
         jLabel1.setText("PASSWORD");
 
@@ -95,6 +102,13 @@ public class login extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
+        if (!pass.getText().equals("")&&!jPasswordField1.getText().equals("")){
+            okButton.setEnabled(true);
+            
+        }
+    }//GEN-LAST:event_okButtonActionPerformed
 
     /**
      * @param args the command line arguments

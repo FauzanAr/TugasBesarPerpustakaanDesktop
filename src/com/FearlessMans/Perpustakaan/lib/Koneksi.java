@@ -8,26 +8,28 @@ package com.FearlessMans.Perpustakaan.lib;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  *
  * @author Ojan
  */
 public class Koneksi {
+    
+    public Koneksi(){}
     private static Connection koneksi;
-    public static void buka_koneksi(){
-        if (koneksi == null){
+    public static Connection buka_koneksi(){
+        
             try {
                 String url = "jdbc:mysql://localhost:100/perpustakaan_tubes";
                 String user = "root";
                 String password = "";
                 DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-                koneksi = (Connection) DriverManager.getConnection(url,user,password);  
+                return koneksi = (Connection) DriverManager.getConnection(url,user,password);  
                 //Selesai
             } catch (SQLException t){
-                System.out.println("Error Membuat Koneksi");
+                throw new RuntimeException("Error Membuat Koneksi",t);
                 //Selesai
             }
-        }
     }
 }
