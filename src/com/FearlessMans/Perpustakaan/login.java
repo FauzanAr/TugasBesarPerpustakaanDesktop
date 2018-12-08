@@ -1,5 +1,7 @@
 package com.FearlessMans.Perpustakaan;
+import com.FearlessMans.Perpustakaan.lib.User;
 import com.FearlessMans.Perpustakaan.lib.UserJavaToDatabase;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -12,7 +14,7 @@ import com.FearlessMans.Perpustakaan.lib.UserJavaToDatabase;
  * @author khosy
  */
 public class login extends javax.swing.JFrame {
-
+    UserJavaToDatabase DAO = new UserJavaToDatabase();
     /**
      * Creates new form NewJFrame
      */
@@ -49,7 +51,6 @@ public class login extends javax.swing.JFrame {
                 okButtonActionPerformed(evt);
             }
         });
-        okButton.setEnabled(false);
 
         jLabel1.setText("PASSWORD");
 
@@ -104,9 +105,15 @@ public class login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
-        if (!pass.getText().equals("")&&!jPasswordField1.getText().equals("")){
+        String password = String.valueOf(jPasswordField1.getPassword());
+        String username = String.valueOf(pass.getText());
+        User dataUser = DAO.getUserByUserNameAndPassword(username);
+        if (password.length()>0 && username.length()>0){
             okButton.setEnabled(true);
-            
+            if(dataUser!= null){
+                new crudBuku().setVisible(true);
+            }else
+                JOptionPane.showMessageDialog(this, "Harap Mendaftar ke Bagian Admin!!", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_okButtonActionPerformed
 
