@@ -61,7 +61,7 @@ public class UserJavaToDatabase {
     public User getUserByUserNameAndPassword(String nim) {
         Connection koneksi = Koneksi.buka_koneksi();
         try {
-                PreparedStatement ps = koneksi.prepareStatement("SELECT * FROM user WHERE nama_user_perpus=? AND password_user_perpus=?");
+                PreparedStatement ps = koneksi.prepareStatement("SELECT * FROM user WHERE nim_user_perpus=? AND password_user_perpus=?");
                 ps.setString(1, nim);
                 ps.setString(2, nim);
                 ResultSet rs = ps.executeQuery();
@@ -71,8 +71,7 @@ public class UserJavaToDatabase {
                 }
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        
+        }        
         return null;
     }
 
@@ -90,4 +89,9 @@ public class UserJavaToDatabase {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+//    public static void main (String []args){
+//        User user;
+//        UserJavaToDatabase userJ = new 
+//        
+//    }
 }

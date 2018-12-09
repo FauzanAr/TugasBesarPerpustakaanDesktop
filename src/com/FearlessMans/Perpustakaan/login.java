@@ -54,6 +54,12 @@ public class login extends javax.swing.JFrame {
 
         jLabel1.setText("PASSWORD");
 
+        pass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                passKeyPressed(evt);
+            }
+        });
+
         nimLabel.setText("NIM / ID");
 
         jLabel3.setText("Login");
@@ -108,14 +114,23 @@ public class login extends javax.swing.JFrame {
         String password = String.valueOf(jPasswordField1.getPassword());
         String username = String.valueOf(pass.getText());
         User dataUser = DAO.getUserByUserNameAndPassword(username);
-        if (password.length()>0 && username.length()>0){
+        if(!password.equals("") && !username.equals("")) {
+            if (password.length()>0 && username.length()>0){
             okButton.setEnabled(true);
-            if(dataUser!= null){
+            if(dataUser != null){
+                this.setVisible(false);
                 new crudBuku().setVisible(true);
             }else
                 JOptionPane.showMessageDialog(this, "Harap Mendaftar ke Bagian Admin!!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Semua Kolom Harus Diisi !!", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_okButtonActionPerformed
+
+    private void passKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passKeyPressed
+        this.okButton.setVisible(true);
+    }//GEN-LAST:event_passKeyPressed
 
     /**
      * @param args the command line arguments

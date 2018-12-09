@@ -16,20 +16,23 @@ import java.sql.Statement;
  */
 public class Koneksi {
     
-    public Koneksi(){}
+    
     private static Connection koneksi;
     public static Connection buka_koneksi(){
-        
-            try {
-                String url = "jdbc:mysql://localhost:100/perpustakaan_tubes";
-                String user = "root";
-                String password = "";
-                DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-                return koneksi = (Connection) DriverManager.getConnection(url,user,password);  
-                //Selesai
-            } catch (SQLException t){
-                throw new RuntimeException("Error Membuat Koneksi",t);
-                //Selesai
-            }
+        try {
+            String url = "jdbc:mysql://localhost:3306/perpustakaan_tubes";
+            String user = "root";
+            String password = "";
+            DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+            return koneksi = (Connection) DriverManager.getConnection(url,user,password);  
+            //Selesai
+        } catch (SQLException t){
+            throw new RuntimeException("Error Membuat Koneksi",t);
+            //Selesai
+        }
+    }
+    
+    public static void main(String[] args) {
+        Connection con = Koneksi.buka_koneksi();
     }
 }
