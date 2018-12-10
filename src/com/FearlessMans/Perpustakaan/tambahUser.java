@@ -71,6 +71,11 @@ public class tambahUser extends javax.swing.JFrame {
         });
 
         jButton2.setText("Kembali");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -138,15 +143,20 @@ public class tambahUser extends javax.swing.JFrame {
             Boolean DAOusers = new UserJavaToDatabase().insertUser(user);
             
             if(DAOusers){
-                JOptionPane.showMessageDialog(this, "Sukses menambahkan User!", "Konfirmasi", JOptionPane.INFORMATION_MESSAGE);
                 jTextField1.setText("");
                 jTextField2.setText("");
                 jComboBox1.setSelectedIndex(-1);
+                JOptionPane.showMessageDialog(this, "Sukses menambahkan User!", "Konfirmasi", JOptionPane.INFORMATION_MESSAGE);              
             }else
                 JOptionPane.showMessageDialog(this, "Maaf penambahan user tidak dapat dilakukan", "Konfirmasi", JOptionPane.ERROR_MESSAGE);
         }else
             JOptionPane.showMessageDialog(this, "Harap Di Isi Semua!!", "ERROR", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.setVisible(false);
+        new crudUser().setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
