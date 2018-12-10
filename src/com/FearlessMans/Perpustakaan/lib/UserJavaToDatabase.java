@@ -19,10 +19,6 @@ import java.util.Set;
  **/
 public class UserJavaToDatabase {
     
-    
-    
-    
-    
     public User getUser(int id) {
         Connection koneksi = Koneksi.buka_koneksi();
         try {
@@ -51,6 +47,14 @@ public class UserJavaToDatabase {
         user.setPassword(rs.getString("password_user_perpus"));
         
         return user;
+    }
+    
+    private Admin extractAdminFromResultSet(ResultSet rs) throws SQLException{
+        Admin admin = new Admin();
+        admin.setId(rs.getInt("id_admin"));
+        admin.setNik(rs.getString("nik_admin"));
+        admin.setPassword(rs.getString("password_admin"));
+        return admin;
     }
 
 
@@ -90,17 +94,33 @@ public class UserJavaToDatabase {
         }        
         return null;
     }
+    
+    public Admin getAdminByUserNameAndPassword(String nik, String password){
+        Connection koneksi = Koneksi.buka_koneksi();
+        try {
+            PreparedStatement ps = koneksi.prepareStatement("SELECT * FROM admin WHERE nik_admin=? AND password_admin=?");
+            ps.setString(1, nik);
+            ps.setString(2, password);
+            ResultSet rs = ps.executeQuery();
+            
+            if(rs.next()){
+                return extractAdminFromResultSet(rs);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     
     public boolean insertUser(User user) {
         Connection koneksi = Koneksi.buka_koneksi();
         try {
-            PreparedStatement ps = koneksi.prepareStatement("INSERT INTO user VALUES (NULL, ?, ?, ?, ?, ?)");
+            PreparedStatement ps = koneksi.prepareStatement("INSERT INTO user(nim_user_perpus, nama_user_perpus, prodi_user_perpus, password_user_perpus) VALUES (?,?,?,?)");
             ps.setString(1, user.getNim());
             ps.setString(2, user.getNama());
             ps.setString(3, user.getProdi());
-            ps.setInt(4, 0);
-            ps.setString(5, user.getPassword());
+            ps.setString(4, user.getPassword());
             
             int i = ps.executeUpdate();
             

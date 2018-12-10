@@ -1,6 +1,7 @@
 package com.FearlessMans.Perpustakaan;
 import com.FearlessMans.Perpustakaan.lib.User;
 import com.FearlessMans.Perpustakaan.lib.UserJavaToDatabase;
+import com.FearlessMans.Perpustakaan.lib.Admin;
 import javax.swing.JOptionPane;
 
 /*
@@ -14,7 +15,8 @@ import javax.swing.JOptionPane;
  * @author khosy
  */
 public class login extends javax.swing.JFrame {
-    UserJavaToDatabase DAO = new UserJavaToDatabase();
+    UserJavaToDatabase DAOUser = new UserJavaToDatabase();
+    UserJavaToDatabase DAOAdmin = new UserJavaToDatabase();
     /**
      * Creates new form NewJFrame
      */
@@ -113,13 +115,17 @@ public class login extends javax.swing.JFrame {
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
         String password = String.valueOf(jPasswordField1.getPassword());
         String username = String.valueOf(pass.getText());
-        User dataUser = DAO.getUserByUserNameAndPassword(username);
+        User dataUser = DAOUser.getUserByUserNameAndPassword(username);
+        Admin dataAdmin = DAOAdmin.getAdminByUserNameAndPassword(username, password);
         if(!password.equals("") && !username.equals("")) {
             if (password.length()>0 && username.length()>0){
             okButton.setEnabled(true);
             if(dataUser != null){
                 this.setVisible(false);
                 new crudBuku().setVisible(true);
+            }else if(dataAdmin != null){
+                this.setVisible(false);
+                new crudUser().setVisible(true);
             }else
                 JOptionPane.showMessageDialog(this, "Harap Mendaftar ke Bagian Admin!!", "Error", JOptionPane.ERROR_MESSAGE);
             }

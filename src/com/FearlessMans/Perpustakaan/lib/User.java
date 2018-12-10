@@ -28,11 +28,12 @@ public class User {
         this.password = password;
     }
     
-    public User(String nim, String nama, String prodi, String password){
+    public User(String nim, String nama, String prodi){
         this.nim = nim;
         this.nama = nama;
         this.prodi = prodi;
-        this.password = password;
+        this.password = nim;
+        this.userPinjam = 0;
     }
 
     public String getNim() {
