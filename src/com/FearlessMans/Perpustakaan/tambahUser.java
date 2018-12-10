@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  */
 public class tambahUser extends javax.swing.JFrame {
     
-    UserJavaToDatabase users;
+    
 
     /**
      * Creates new form tambahUser
@@ -131,13 +131,19 @@ public class tambahUser extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        String prodi = String.valueOf(jComboBox1.getSelectedItem());
         if (!jTextField1.getText().equals("") && !jTextField2.getText().equals("")){
-            User user = new User(jTextField2.getText(),jTextField1.getText(),(String)jComboBox1.getSelectedItem());
-            boolean insert = users.insertUser(user);
-            /*if(users.insertUser(user)){
+            User user = new User(jTextField2.getText(),jTextField1.getText(),prodi);
+            Boolean DAOusers = new UserJavaToDatabase().insertUser(user);
+            
+            if(DAOusers){
                 JOptionPane.showMessageDialog(this, "Sukses menambahkan User!", "Konfirmasi", JOptionPane.INFORMATION_MESSAGE);
+                jTextField1.setText("");
+                jTextField2.setText("");
+                jComboBox1.setSelectedIndex(-1);
             }else
-                JOptionPane.showMessageDialog(this, "Maaf penambahan user tidak dapat dilakukan", "Konfirmasi", JOptionPane.ERROR_MESSAGE);*/
+                JOptionPane.showMessageDialog(this, "Maaf penambahan user tidak dapat dilakukan", "Konfirmasi", JOptionPane.ERROR_MESSAGE);
         }else
             JOptionPane.showMessageDialog(this, "Harap Di Isi Semua!!", "ERROR", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_jButton1ActionPerformed

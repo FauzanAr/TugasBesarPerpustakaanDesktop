@@ -33,7 +33,6 @@ public class User {
         this.nama = nama;
         this.prodi = prodi;
         this.password = nim;
-        this.userPinjam = 0;
     }
 
     public String getNim() {
