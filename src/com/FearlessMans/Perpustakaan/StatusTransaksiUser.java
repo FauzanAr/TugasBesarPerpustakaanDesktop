@@ -120,7 +120,7 @@ public class StatusTransaksiUser extends javax.swing.JFrame {
 
     private void kembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kembaliActionPerformed
         this.setVisible(false);
-        new MenuUser().setVisible(true);
+        new menuUser().setVisible(true);
     }//GEN-LAST:event_kembaliActionPerformed
 
     /**
