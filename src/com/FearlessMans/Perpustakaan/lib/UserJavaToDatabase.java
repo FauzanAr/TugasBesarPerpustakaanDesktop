@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -53,8 +54,23 @@ public class UserJavaToDatabase {
     }
 
 
-    public Set<User> getAllUser() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Set getAllUser() {
+        Connection koneksi = Koneksi.buka_koneksi();
+        try {
+            Statement stmt = koneksi.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM user");
+            
+            Set users = new HashSet();
+            
+            while (rs.next()){
+                User user = extractUserFromResultSet(rs);
+                users.add(user);
+            }
+            return users;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 
@@ -76,22 +92,63 @@ public class UserJavaToDatabase {
     }
 
     
-    public boolean insertUser() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean insertUser(User user) {
+        Connection koneksi = Koneksi.buka_koneksi();
+        try {
+            PreparedStatement ps = koneksi.prepareStatement("INSERT INTO user VALUES (NULL, ?, ?, ?, ?, ?)");
+            ps.setString(1, user.getNim());
+            ps.setString(2, user.getNama());
+            ps.setString(3, user.getProdi());
+            ps.setInt(4, 0);
+            ps.setString(5, user.getPassword());
+            
+            int i = ps.executeUpdate();
+            
+            if (i == 1){
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
-    public boolean updateUser() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean updateUser(User user) {
+        Connection koneksi = Koneksi.buka_koneksi();
+        
+        try {
+            PreparedStatement ps = koneksi.prepareStatement("UPDATE user SET nim_user_perpus=?, nama_user_perpus=?, prodi_user_perpus=?, user_pinjam=? WHERE id=?");
+            ps.setString(1, user.getNim());
+            ps.setString(2, user.getNama());
+            ps.setString(3, user.getProdi());
+            ps.setInt(4, user.getUserPinjam());
+            ps.setString(5, user.getPassword());
+            ps.setInt(6, user.getID());
+            
+            int i = ps.executeUpdate();
+            
+            if (i == 1){
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
 
-    public boolean deleteUser() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean deleteUser(int id) {
+        Connection koneksi = Koneksi.buka_koneksi();
+        
+        try {
+            Statement stmt = koneksi.createStatement();
+            int i = stmt.executeUpdate("DELETE FROM user WHERE id="+id);
+            if(i == 1){
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
-    
-//    public static void main (String []args){
-//        User user;
-//        UserJavaToDatabase userJ = new 
-//        
-//    }
 }
