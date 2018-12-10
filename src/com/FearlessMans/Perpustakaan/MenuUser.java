@@ -9,12 +9,12 @@ package com.FearlessMans.Perpustakaan;
  *
  * @author khosy
  */
-public class MenuAdmin extends javax.swing.JFrame {
+public class MenuUser extends javax.swing.JFrame {
 
     /**
-     * Creates new form MenuAdmin
+     * Creates new form menuUser
      */
-    public MenuAdmin() {
+    public MenuUser() {
         initComponents();
     }
 
@@ -28,8 +28,7 @@ public class MenuAdmin extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        buku = new javax.swing.JButton();
-        user = new javax.swing.JButton();
+        pinjam = new javax.swing.JButton();
         transaksi = new javax.swing.JButton();
         logout = new javax.swing.JButton();
 
@@ -37,17 +36,10 @@ public class MenuAdmin extends javax.swing.JFrame {
 
         jLabel1.setText("SELAMAT DATANG");
 
-        buku.setText("Management Buku");
-        buku.addActionListener(new java.awt.event.ActionListener() {
+        pinjam.setText("Peminjaman");
+        pinjam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bukuActionPerformed(evt);
-            }
-        });
-
-        user.setText("Management User");
-        user.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                userActionPerformed(evt);
+                pinjamActionPerformed(evt);
             }
         });
 
@@ -71,56 +63,47 @@ public class MenuAdmin extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
+                .addComponent(pinjam, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buku)
-                    .addComponent(transaksi))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(user, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(logout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(37, 37, 37))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(146, 146, 146)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(transaksi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(55, 55, 55)
+                        .addComponent(logout)
+                        .addGap(37, 37, 37))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(27, 27, 27)
                 .addComponent(jLabel1)
-                .addGap(43, 43, 43)
+                .addGap(55, 55, 55)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buku)
-                    .addComponent(user))
-                .addGap(45, 45, 45)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pinjam)
                     .addComponent(transaksi)
                     .addComponent(logout))
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addContainerGap(100, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void bukuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bukuActionPerformed
-        this.setVisible(false);
-        new crudBuku().setVisible(true);
-    }//GEN-LAST:event_bukuActionPerformed
-
-    private void userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userActionPerformed
-        this.setVisible(false);
-        new crudUser().setVisible(true);
-    }//GEN-LAST:event_userActionPerformed
 
     private void transaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transaksiActionPerformed
         this.setVisible(false);
         new StatusTransaksiUser().setVisible(true);
     }//GEN-LAST:event_transaksiActionPerformed
 
+    private void pinjamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pinjamActionPerformed
+        this.setVisible(false);
+        new Peminjaman().setVisible(true);
+    }//GEN-LAST:event_pinjamActionPerformed
+
     private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
-       this.setVisible(false);
-       new login().setVisible(true);
+        this.setVisible(false);
+        new tampilanAwal().setVisible(true);
     }//GEN-LAST:event_logoutActionPerformed
 
     /**
@@ -140,29 +123,29 @@ public class MenuAdmin extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MenuAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MenuAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MenuAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MenuAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuAdmin().setVisible(true);
+                new MenuUser().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buku;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton logout;
+    private javax.swing.JButton pinjam;
     private javax.swing.JButton transaksi;
-    private javax.swing.JButton user;
     // End of variables declaration//GEN-END:variables
 }
