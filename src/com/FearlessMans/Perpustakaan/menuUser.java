@@ -99,6 +99,7 @@ public class menuUser extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void peminjamanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_peminjamanActionPerformed
@@ -157,9 +158,6 @@ public class menuUser extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JButton logout;
     private javax.swing.JButton peminjaman;
-    private javax.swing.JButton pinjam;
-    private javax.swing.JButton pinjam1;
-    private javax.swing.JButton pinjam2;
     private javax.swing.JButton transaksi;
     // End of variables declaration//GEN-END:variables
 }

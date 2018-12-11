@@ -101,6 +101,7 @@ public class MenuAdmin extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void bukuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bukuActionPerformed
@@ -115,7 +116,7 @@ public class MenuAdmin extends javax.swing.JFrame {
 
     private void transaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transaksiActionPerformed
         this.setVisible(false);
-        new StatusTransaksiUser().setVisible(true);
+        new StatusTransaksiAdmin().setVisible(true);
     }//GEN-LAST:event_transaksiActionPerformed
 
     private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
