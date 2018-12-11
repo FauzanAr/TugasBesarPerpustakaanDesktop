@@ -26,12 +26,16 @@ public class tambahBuku extends javax.swing.JFrame {
     
     public tambahBuku() {
         this.combo = new comboKategori(); // untuk menginstansi model dari Jcombo box
-            this.combo.tambahKategori(new Kategori(1, "Kategori 1")); 
-            this.combo.tambahKategori(new Kategori(2, "Kategori 2")); 
-            this.combo.tambahKategori(new Kategori(3, "Kategori 3")); 
-            this.combo.tambahKategori(new Kategori(4, "Kategori 4")); 
-            this.combo.tambahKategori(new Kategori(5, "Kategori 5")); 
-            this.combo.tambahKategori(new Kategori(6, "Kategori 6")); 
+            this.combo.tambahKategori(new Kategori(1, "Agama")); 
+            this.combo.tambahKategori(new Kategori(2, "Sejarah")); 
+            this.combo.tambahKategori(new Kategori(3, "Bahasa Indonesia")); 
+            this.combo.tambahKategori(new Kategori(4, "Teknologi")); 
+            this.combo.tambahKategori(new Kategori(5, "Ilmu Pengetahuan Alam")); 
+            this.combo.tambahKategori(new Kategori(6, "Bahasa Inggris"));
+            this.combo.tambahKategori(new Kategori(7, "Matematika"));
+            this.combo.tambahKategori(new Kategori(8, "Biografi"));
+            this.combo.tambahKategori(new Kategori(9, "Hukum"));
+            this.combo.tambahKategori(new Kategori(10, "Geografi"));
         
         initComponents();
     }
@@ -93,7 +97,7 @@ public class tambahBuku extends javax.swing.JFrame {
             }
         });
 
-        comboKat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboKat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Agama", "Sejarah", "Bahasa Indonesia", "Teknologi", "Ilmu Pengetahuan Alam", "Bahasa Inggris", "Matematika", "Biografi", "Hukum", "Geografi" }));
         comboKat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboKatActionPerformed(evt);
