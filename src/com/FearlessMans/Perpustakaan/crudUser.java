@@ -3,8 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+
 package com.FearlessMans.Perpustakaan;
 
+import com.FearlessMans.Perpustakaan.lib.User;
+import com.FearlessMans.Perpustakaan.lib.UserJavaToDatabase;
+import com.FearlessMans.Perpustakaan.lib.userTableModel;
+import javax.swing.JTable;
+import javax.swing.table.TableModel;
 /**
  *
  * @author khosy
@@ -14,8 +21,10 @@ public class crudUser extends javax.swing.JFrame {
     /**
      * Creates new form crudUser
      */
+    userTableModel model = new userTableModel();
     public crudUser() {
         initComponents();
+        
     }
 
     /**
@@ -37,61 +46,7 @@ public class crudUser extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "No", "NIM", "Nama Mahasiswa", "Kelas", "Prodi"
-            }
-        ));
+        jTable1.setModel(model);
         jScrollPane1.setViewportView(jTable1);
 
         jLabel1.setHorizontalAlignment(jLabel1.CENTER);
