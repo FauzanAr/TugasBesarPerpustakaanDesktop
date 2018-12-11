@@ -27,6 +27,21 @@ public class Buku {
         this.jumlahBuku = jumlahBuku;
     }
 
+    public Buku(String judul, String pengarang, int idKategory, int jumlahBuku) {
+        this.judul = judul;
+        this.pengarang = pengarang;
+        this.idKategory = idKategory;
+        this.jumlahBuku = jumlahBuku;
+    }
+
+    
+
+
+
+    
+
+    
+
     public int getId() {
         return id;
     }

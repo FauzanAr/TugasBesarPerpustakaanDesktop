@@ -12,24 +12,23 @@ import java.util.ArrayList;
  * @author khosy
  */
 public class comboKategori {
-    private ArrayList<Item> kat; // varaibel items untuk menyimpan item dari objek
+    private ArrayList<Kategori> kat; // varaibel items untuk menyimpan item dari objek
 
     //kontruktor pada array list
-    public ComboModel() {
-      this.items = new ArrayList<>();
+    public comboKategori() {
+      this.kat = new ArrayList<>();
     }
     
-    //mengkonversikan variabel array yang telah di buat agar bisa mengembalikan hasilnya
-    public Item[] toArray(){
-        Item[] a = new Item[this.items.size()];
+    public Kategori[] toArray(){
+        Kategori[] a = new Kategori[this.kat.size()];
             for(int i = 0; i < a.length; i++){
-                a [i] = this.items.get(i);
+                a [i] = this.kat.get(i);
             }
             return a;
     }
     
     //untuk mendambahkan item ke list dari Item
-    public void tambahItem(Item item){
-        this.items.add(item);
+    public void tambahKategori(Kategori kategori){
+        this.kat.add(kategori);
     }
 }

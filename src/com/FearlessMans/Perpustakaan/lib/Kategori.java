@@ -34,5 +34,9 @@ public class Kategori {
         return namaKategori;
     }
     
+    @Override
+    public String toString() {
+        return this.namaKategori;
+    }
     
 }

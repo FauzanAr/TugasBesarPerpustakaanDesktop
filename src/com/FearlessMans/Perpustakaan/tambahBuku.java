@@ -7,6 +7,9 @@ package com.FearlessMans.Perpustakaan;
 
 import com.FearlessMans.Perpustakaan.lib.Buku;
 import com.FearlessMans.Perpustakaan.lib.BukuJavaToDatabase;
+import com.FearlessMans.Perpustakaan.lib.Kategori;
+import com.FearlessMans.Perpustakaan.lib.comboKategori;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,11 +18,37 @@ import javax.swing.JOptionPane;
  */
 public class tambahBuku extends javax.swing.JFrame {
 
+    private comboKategori combo;
+    private ArrayList<Kategori> category = new ArrayList<>();
     /**
      * Creates new form crudBuku
      */
+    
     public tambahBuku() {
+        this.combo = new comboKategori(); // untuk menginstansi model dari Jcombo box
+            this.combo.tambahKategori(new Kategori(1, "Kategori 1")); 
+            this.combo.tambahKategori(new Kategori(2, "Kategori 2")); 
+            this.combo.tambahKategori(new Kategori(3, "Kategori 3")); 
+            this.combo.tambahKategori(new Kategori(4, "Kategori 4")); 
+            this.combo.tambahKategori(new Kategori(5, "Kategori 5")); 
+            this.combo.tambahKategori(new Kategori(6, "Kategori 6")); 
+        
         initComponents();
+    }
+    
+    private Object[] kate (String nama, int id) {
+        float category = 0;
+        Kategori[] kat = this.combo.toArray();
+        for(int i = 0; i < kat.length; i++) {
+            if(nama.equalsIgnoreCase(kat[i].getNamaKategori())) {
+                category = kat[i].getId();
+            }
+        } 
+        Object[] o = {
+          nama,
+          category
+        };
+        return o;
     }
 
     /**
@@ -164,9 +193,11 @@ public class tambahBuku extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void tambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahActionPerformed
-        String prodi = String.valueOf(comboKat.getSelectedItem());
+
+        int stok = Integer.valueOf(fieldStok.getText());
+        int id = Integer.valueOf(comboKat.getSelectedItem().toString());
         if (!fieldJudul.getText().equals("") && !fieldPengarang.getText().equals("")){
-            Buku buku = new Buku(fieldJudul.getText(),fieldPengarang.getText(), comboKat, fieldStok.getText() ); //error
+            Buku buku = new Buku(fieldJudul.getText(), fieldPengarang.getText(), stok, id);
             Boolean DAOusers = new BukuJavaToDatabase().insertBuku(buku);
             
             if(DAOusers){
