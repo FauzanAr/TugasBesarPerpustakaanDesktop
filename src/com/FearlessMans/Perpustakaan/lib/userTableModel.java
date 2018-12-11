@@ -12,8 +12,8 @@ package com.FearlessMans.Perpustakaan.lib;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 public class userTableModel extends AbstractTableModel {
-    String [] columnNames = {"ID","Nim","Nama","Prodi","Jumlah Peminjaman"};
-    Object[][] data = {{"1","1741720212","Fauzan","Teknologi Informasi","0"}};
+    public String [] columnNames = {"ID","Nim","Nama","Prodi","Jumlah Peminjaman"};
+    public Object[][] data = {{"1","1741720212","Fauzan","Teknologi Informasi","0"}};
     
     @Override
     public int getRowCount() {
@@ -39,6 +39,7 @@ public class userTableModel extends AbstractTableModel {
         return getValueAt(0,c).getClass();
     }
     
+    @Override
     public boolean isCellEditable(int row, int column)
     {
         if (column == 1 || column == 2){

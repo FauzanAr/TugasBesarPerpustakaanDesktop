@@ -10,7 +10,11 @@ package com.FearlessMans.Perpustakaan;
 import com.FearlessMans.Perpustakaan.lib.User;
 import com.FearlessMans.Perpustakaan.lib.UserJavaToDatabase;
 import com.FearlessMans.Perpustakaan.lib.userTableModel;
+import java.util.ArrayList;
+import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 /**
  *
@@ -21,9 +25,11 @@ public class crudUser extends javax.swing.JFrame {
     /**
      * Creates new form crudUser
      */
-    userTableModel model = new userTableModel();
+
     public crudUser() {
         initComponents();
+        
+        jTable1.setModel(new userTableModel());
         
     }
 
@@ -46,7 +52,14 @@ public class crudUser extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(model);
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
         jScrollPane1.setViewportView(jTable1);
 
         jLabel1.setHorizontalAlignment(jLabel1.CENTER);
