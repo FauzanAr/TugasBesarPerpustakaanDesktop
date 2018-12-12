@@ -9,11 +9,16 @@ package com.FearlessMans.Perpustakaan.lib;
  *
  * @author Ojan
  */
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 public class userTableModel extends AbstractTableModel {
-    public String [] columnNames = {"ID","Nim","Nama","Prodi","Jumlah Peminjaman"};
-    public Object[][] data = {{"1","1741720212","Fauzan","Teknologi Informasi","0"}};
+    private String [] columnNames = {"ID","Nim","Nama","Prodi","Jumlah Peminjaman"};
+    private Object[][] data = {{"11","1741720212","Fauzann","Teknologi Informasi","0"}};
+    //HashSet allDataUser  = (HashSet) new UserJavaToDatabase().getAllUser();
     
     @Override
     public int getRowCount() {
@@ -29,15 +34,21 @@ public class userTableModel extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         return data[rowIndex][columnIndex];
     }
+
+    @Override
+    public Class<?> getColumnClass(int c) {
+        return getValueAt(0, c).getClass();
+    }
+    
     
 
-    public String getColumName(int column){
-        return columnNames[column];
+    @Override
+    public String getColumnName(int column) {
+        return columnNames[column]; //To change body of generated methods, choose Tools | Templates.
     }
     
-    public Class getColumnClas(int c){
-        return getValueAt(0,c).getClass();
-    }
+    
+
     
     @Override
     public boolean isCellEditable(int row, int column)
