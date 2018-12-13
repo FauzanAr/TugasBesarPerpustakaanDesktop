@@ -43,26 +43,24 @@ public class tambahBuku extends javax.swing.JFrame {
             
             initComponents();
     }
+      
     
-   
+    private Object[] kate (String nama, int id) {
+        float category = 0;
+        Kategori[] kat = this.combo.toArray();
+        for(int i = 0; i < kat.length; i++) {
+            if(nama.equalsIgnoreCase(kat[i].getNamaKategori())) {
+                category = kat[i].getId();
+            }
+        } 
+        Object[] o = {
+          nama,
+          category
+        };
+        return o;
+    }
     
-    
-    
-    
-//    private Object[] kate (String nama, int id) {
-//        float category = 0;
-//        Kategori[] kat = this.combo.toArray();
-//        for(int i = 0; i < kat.length; i++) {
-//            if(nama.equalsIgnoreCase(kat[i].getNamaKategori())) {
-//                category = kat[i].getId();
-//            }
-//        } 
-//        Object[] o = {
-//          nama,
-//          category
-//        };
-//        return o;
-//    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -206,10 +204,10 @@ public class tambahBuku extends javax.swing.JFrame {
 
     private void tambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahActionPerformed
 
-//        int stok = Integer.valueOf(fieldStok.getText());
-//        int id = Integer.valueOf(comboKat.getSelectedItem().toString());
+        int stok = Integer.valueOf(fieldStok.getText());
+     
 //        if (!fieldJudul.getText().equals("") && !fieldPengarang.getText().equals("")){
-//            Buku buku = new Buku(fieldJudul.getText(), fieldPengarang.getText(), stok, id);
+//            Buku buku = new Buku(fieldJudul.getText(), comboKat ,  , stok);
 //            Boolean DAOusers = new BukuJavaToDatabase().insertBuku(buku);
 //            
 //            if(DAOusers){
