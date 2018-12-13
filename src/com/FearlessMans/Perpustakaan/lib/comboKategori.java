@@ -6,12 +6,11 @@
 package com.FearlessMans.Perpustakaan.lib;
 
 import java.util.ArrayList;
-
 /**
  *
  * @author khosy
  */
-public class comboKategori {
+public class comboKategori{
     private ArrayList<Kategori> kat; // varaibel items untuk menyimpan item dari objek
 
     //kontruktor pada array list
@@ -20,15 +19,16 @@ public class comboKategori {
     }
     
     public Kategori[] toArray(){
-        Kategori[] a = new Kategori[this.kat.size()];
-            for(int i = 0; i < a.length; i++){
-                a [i] = this.kat.get(i);
+        Kategori[] kat = new Kategori[this.kat.size()];
+            for(int i = 0; i < kat.length; i++){
+                kat [i] = this.kat.get(i);
             }
-            return a;
+            return kat;
     }
     
     //untuk mendambahkan item ke list dari Item
-    public void tambahKategori(Kategori kategori){
-        this.kat.add(kategori);
+    public void tambahKategori(String namKategori, int id){
+        Kategori kat = new Kategori(namKategori, id);
+        this.kat.add(kat);
     }
 }

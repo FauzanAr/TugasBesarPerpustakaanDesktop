@@ -10,6 +10,9 @@ import com.FearlessMans.Perpustakaan.lib.BukuJavaToDatabase;
 import com.FearlessMans.Perpustakaan.lib.Kategori;
 import com.FearlessMans.Perpustakaan.lib.comboKategori;
 import java.util.ArrayList;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,43 +20,49 @@ import javax.swing.JOptionPane;
  * @author khosy
  */
 public class tambahBuku extends javax.swing.JFrame {
-
-    private comboKategori combo;
     private ArrayList<Kategori> category = new ArrayList<>();
+    private ComboBoxModel<String> comboModel;
+    private comboKategori combo;
+    
     /**
      * Creates new form crudBuku
      */
     
     public tambahBuku() {
-        this.combo = new comboKategori(); // untuk menginstansi model dari Jcombo box
-            this.combo.tambahKategori(new Kategori(1, "Agama")); 
-            this.combo.tambahKategori(new Kategori(2, "Sejarah")); 
-            this.combo.tambahKategori(new Kategori(3, "Bahasa Indonesia")); 
-            this.combo.tambahKategori(new Kategori(4, "Teknologi")); 
-            this.combo.tambahKategori(new Kategori(5, "Ilmu Pengetahuan Alam")); 
-            this.combo.tambahKategori(new Kategori(6, "Bahasa Inggris"));
-            this.combo.tambahKategori(new Kategori(7, "Matematika"));
-            this.combo.tambahKategori(new Kategori(8, "Biografi"));
-            this.combo.tambahKategori(new Kategori(9, "Hukum"));
-            this.combo.tambahKategori(new Kategori(10, "Geografi"));
-        
-        initComponents();
+        this.combo = new comboKategori(); //
+            this.combo.tambahKategori("Agama" ,1 );
+            this.combo.tambahKategori("Sejarah" ,2 );
+            this.combo.tambahKategori("Bahasa Indonesia", 3 );
+            this.combo.tambahKategori("Teknologi", 4 );
+            this.combo.tambahKategori("Ilmu Pengetahuan Alam", 5 );
+            this.combo.tambahKategori("Bahasa Inggris", 6);
+            this.combo.tambahKategori( "Matematika", 7);
+            this.combo.tambahKategori("Biografi",8);
+            this.combo.tambahKategori("Hukum", 9 );
+            this.combo.tambahKategori("Geografi",10 );
+            
+            initComponents();
     }
     
-    private Object[] kate (String nama, int id) {
-        float category = 0;
-        Kategori[] kat = this.combo.toArray();
-        for(int i = 0; i < kat.length; i++) {
-            if(nama.equalsIgnoreCase(kat[i].getNamaKategori())) {
-                category = kat[i].getId();
-            }
-        } 
-        Object[] o = {
-          nama,
-          category
-        };
-        return o;
-    }
+   
+    
+    
+    
+    
+//    private Object[] kate (String nama, int id) {
+//        float category = 0;
+//        Kategori[] kat = this.combo.toArray();
+//        for(int i = 0; i < kat.length; i++) {
+//            if(nama.equalsIgnoreCase(kat[i].getNamaKategori())) {
+//                category = kat[i].getId();
+//            }
+//        } 
+//        Object[] o = {
+//          nama,
+//          category
+//        };
+//        return o;
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -71,7 +80,7 @@ public class tambahBuku extends javax.swing.JFrame {
         fieldJudul = new javax.swing.JTextField();
         fieldPengarang = new javax.swing.JTextField();
         tambah = new javax.swing.JButton();
-        comboKat = new javax.swing.JComboBox<>();
+        javax.swing.JComboBox<Kategori> comboKat = new JComboBox<Kategori>(combo.toArray());
         jLabel4 = new javax.swing.JLabel();
         fieldStok = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
@@ -97,7 +106,6 @@ public class tambahBuku extends javax.swing.JFrame {
             }
         });
 
-        comboKat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Agama", "Sejarah", "Bahasa Indonesia", "Teknologi", "Ilmu Pengetahuan Alam", "Bahasa Inggris", "Matematika", "Biografi", "Hukum", "Geografi" }));
         comboKat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboKatActionPerformed(evt);
@@ -198,22 +206,22 @@ public class tambahBuku extends javax.swing.JFrame {
 
     private void tambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahActionPerformed
 
-        int stok = Integer.valueOf(fieldStok.getText());
-        int id = Integer.valueOf(comboKat.getSelectedItem().toString());
-        if (!fieldJudul.getText().equals("") && !fieldPengarang.getText().equals("")){
-            Buku buku = new Buku(fieldJudul.getText(), fieldPengarang.getText(), stok, id);
-            Boolean DAOusers = new BukuJavaToDatabase().insertBuku(buku);
-            
-            if(DAOusers){
-                fieldJudul.setText("");
-                fieldPengarang.setText("");
-                comboKat.setSelectedIndex(-1);
-                fieldStok.setText("");
-                JOptionPane.showMessageDialog(this, "Sukses menambahkan User!", "Konfirmasi", JOptionPane.INFORMATION_MESSAGE);              
-            }else
-                JOptionPane.showMessageDialog(this, "Maaf penambahan user tidak dapat dilakukan", "Konfirmasi", JOptionPane.ERROR_MESSAGE);
-        }else
-            JOptionPane.showMessageDialog(this, "Harap Di Isi Semua!!", "ERROR", JOptionPane.ERROR_MESSAGE);
+//        int stok = Integer.valueOf(fieldStok.getText());
+//        int id = Integer.valueOf(comboKat.getSelectedItem().toString());
+//        if (!fieldJudul.getText().equals("") && !fieldPengarang.getText().equals("")){
+//            Buku buku = new Buku(fieldJudul.getText(), fieldPengarang.getText(), stok, id);
+//            Boolean DAOusers = new BukuJavaToDatabase().insertBuku(buku);
+//            
+//            if(DAOusers){
+//                fieldJudul.setText("");
+//                fieldPengarang.setText("");
+//                comboKat.setSelectedIndex(-1);
+//                fieldStok.setText("");
+//                JOptionPane.showMessageDialog(this, "Sukses menambahkan User!", "Konfirmasi", JOptionPane.INFORMATION_MESSAGE);              
+//            }else
+//                JOptionPane.showMessageDialog(this, "Maaf penambahan user tidak dapat dilakukan", "Konfirmasi", JOptionPane.ERROR_MESSAGE);
+//        }else
+//            JOptionPane.showMessageDialog(this, "Harap Di Isi Semua!!", "ERROR", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_tambahActionPerformed
 
     /**
@@ -253,7 +261,6 @@ public class tambahBuku extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> comboKat;
     private javax.swing.JTextField fieldJudul;
     private javax.swing.JTextField fieldPengarang;
     private javax.swing.JTextField fieldStok;

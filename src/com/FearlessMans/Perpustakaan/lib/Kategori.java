@@ -13,9 +13,9 @@ public class Kategori {
     private int id;
     private String namaKategori;
 
-    public Kategori(int id, String namaKategori) {
-        this.id = id;
+    public Kategori(String namaKategori, int id) {
         this.namaKategori = namaKategori;
+        this.id = id;  
     }
 
     public void setId(int id) {
