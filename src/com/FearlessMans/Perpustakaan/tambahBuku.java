@@ -78,7 +78,7 @@ public class tambahBuku extends javax.swing.JFrame {
         fieldJudul = new javax.swing.JTextField();
         fieldPengarang = new javax.swing.JTextField();
         tambah = new javax.swing.JButton();
-        javax.swing.JComboBox<Kategori> comboKat = new JComboBox<Kategori>(combo.toArray());
+        comboKat = new JComboBox<Kategori>(combo.toArray());
         jLabel4 = new javax.swing.JLabel();
         fieldStok = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
@@ -206,20 +206,20 @@ public class tambahBuku extends javax.swing.JFrame {
 
         int stok = Integer.valueOf(fieldStok.getText());
      
-//        if (!fieldJudul.getText().equals("") && !fieldPengarang.getText().equals("")){
-//            Buku buku = new Buku(fieldJudul.getText(), comboKat ,  , stok);
-//            Boolean DAOusers = new BukuJavaToDatabase().insertBuku(buku);
-//            
-//            if(DAOusers){
-//                fieldJudul.setText("");
-//                fieldPengarang.setText("");
-//                comboKat.setSelectedIndex(-1);
-//                fieldStok.setText("");
-//                JOptionPane.showMessageDialog(this, "Sukses menambahkan User!", "Konfirmasi", JOptionPane.INFORMATION_MESSAGE);              
-//            }else
-//                JOptionPane.showMessageDialog(this, "Maaf penambahan user tidak dapat dilakukan", "Konfirmasi", JOptionPane.ERROR_MESSAGE);
-//        }else
-//            JOptionPane.showMessageDialog(this, "Harap Di Isi Semua!!", "ERROR", JOptionPane.ERROR_MESSAGE);
+        if (!fieldJudul.getText().equals("") && !fieldPengarang.getText().equals("")){
+            Buku buku = new Buku(fieldJudul.getText(), fieldPengarang.getText(), (int) comboKat.getSelectedItem(), stok);
+            Boolean DAOusers = new BukuJavaToDatabase().insertBuku(buku);
+            
+            if(DAOusers){
+                fieldJudul.setText("");
+                fieldPengarang.setText("");
+                comboKat.setSelectedIndex(-1);
+                fieldStok.setText("");
+                JOptionPane.showMessageDialog(this, "Sukses menambahkan User!", "Konfirmasi", JOptionPane.INFORMATION_MESSAGE);              
+            }else
+                JOptionPane.showMessageDialog(this, "Maaf penambahan user tidak dapat dilakukan", "Konfirmasi", JOptionPane.ERROR_MESSAGE);
+        }else
+            JOptionPane.showMessageDialog(this, "Harap Di Isi Semua!!", "ERROR", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_tambahActionPerformed
 
     /**
@@ -259,6 +259,7 @@ public class tambahBuku extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<Kategori> comboKat;
     private javax.swing.JTextField fieldJudul;
     private javax.swing.JTextField fieldPengarang;
     private javax.swing.JTextField fieldStok;
