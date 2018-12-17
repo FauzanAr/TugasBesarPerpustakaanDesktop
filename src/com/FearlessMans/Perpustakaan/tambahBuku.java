@@ -14,6 +14,7 @@ import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import jdk.nashorn.internal.ir.IdentNode;
 
 /**
  *
@@ -23,6 +24,7 @@ public class tambahBuku extends javax.swing.JFrame {
     private ArrayList<Kategori> category = new ArrayList<>();
     private ComboBoxModel<String> comboModel;
     private comboKategori combo;
+    private DefaultComboBoxModel defCom;
     
     /**
      * Creates new form crudBuku
@@ -45,17 +47,18 @@ public class tambahBuku extends javax.swing.JFrame {
     }
       
     
-    private Object[] kate (String nama, int id) {
-        float category = 0;
+    
+    
+//    
+    private Object[] kate (int id) {
         Kategori[] kat = this.combo.toArray();
         for(int i = 0; i < kat.length; i++) {
-            if(nama.equalsIgnoreCase(kat[i].getNamaKategori())) {
-                category = kat[i].getId();
+            if(combo.equals(kat[i].getId())){
+                
             }
-        } 
+        }      
         Object[] o = {
-          nama,
-          category
+         id
         };
         return o;
     }
@@ -203,11 +206,11 @@ public class tambahBuku extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void tambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahActionPerformed
-
         int stok = Integer.valueOf(fieldStok.getText());
-     
+        Kategori kat = (Kategori) this.comboKat.getSelectedItem();
+        int idkat = kat.getId();
         if (!fieldJudul.getText().equals("") && !fieldPengarang.getText().equals("")){
-            Buku buku = new Buku(fieldJudul.getText(), fieldPengarang.getText(), (int) comboKat.getSelectedItem(), stok);
+            Buku buku = new Buku(fieldJudul.getText(), fieldPengarang.getText(), idkat, stok);
             Boolean DAOusers = new BukuJavaToDatabase().insertBuku(buku);
             
             if(DAOusers){
@@ -215,9 +218,9 @@ public class tambahBuku extends javax.swing.JFrame {
                 fieldPengarang.setText("");
                 comboKat.setSelectedIndex(-1);
                 fieldStok.setText("");
-                JOptionPane.showMessageDialog(this, "Sukses menambahkan User!", "Konfirmasi", JOptionPane.INFORMATION_MESSAGE);              
+                JOptionPane.showMessageDialog(this, "Sukses menambahkan Buku!", "Konfirmasi", JOptionPane.INFORMATION_MESSAGE);              
             }else
-                JOptionPane.showMessageDialog(this, "Maaf penambahan user tidak dapat dilakukan", "Konfirmasi", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Maaf penambahan Buku tidak dapat dilakukan", "Konfirmasi", JOptionPane.ERROR_MESSAGE);
         }else
             JOptionPane.showMessageDialog(this, "Harap Di Isi Semua!!", "ERROR", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_tambahActionPerformed

@@ -15,6 +15,7 @@ public class Buku {
     private String pengarang;
     private int idKategory;
     private int jumlahBuku;
+    private comboKategori seletced;
 
     public Buku() {
     }
@@ -27,10 +28,10 @@ public class Buku {
         this.jumlahBuku = jumlahBuku;
     }
 
-    public Buku(String judul, String pengarang, int idKategory, int jumlahBuku) {
+    public Buku(String judul, String pengarang, int id, int jumlahBuku) {
         this.judul = judul;
         this.pengarang = pengarang;
-        this.idKategory = idKategory;
+        this.id = id;
         this.jumlahBuku = jumlahBuku;
     }
 
