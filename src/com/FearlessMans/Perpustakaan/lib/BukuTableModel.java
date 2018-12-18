@@ -14,7 +14,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class BukuTableModel extends AbstractTableModel{
  
-     private String [] columnNames = {"Judul Buku","Pengarang","Id Kategori","Jumlah Peminjaman"};
+    private String [] columnNames = {"Judul Buku","Pengarang","Jumlah Peminjaman"};
     private ArrayList <Buku> bukuList; 
     
     public BukuTableModel(BukuJavaToDatabase list){
@@ -47,10 +47,6 @@ public class BukuTableModel extends AbstractTableModel{
         }else if (col == 1){
             tmp = bukuList.get(row).getPengarang();
         }else if (col == 2){
-            tmp = bukuList.get(row).getIdKategory();
-        }else if (col == 3){
-            tmp = bukuList.get(row).getJudul();
-        }else if (col == 4){
             tmp = bukuList.get(row).getJumlahBuku();
         }
         return tmp;

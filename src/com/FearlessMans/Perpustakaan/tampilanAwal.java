@@ -21,11 +21,10 @@ public class tampilanAwal extends javax.swing.JFrame {
     BukuJavaToDatabase list;
     
     public tampilanAwal() {
+        initComponents();
         list = new BukuJavaToDatabase();
         list.getAllBuku();
         tab.setModel(new BukuTableModel(list));
-        
-        initComponents();
     }
 
     /**
