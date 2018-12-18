@@ -115,7 +115,7 @@ public class BukuJavaToDatabase {
         
         try {
             Statement stmt = koneksi.createStatement();
-            int i = stmt.executeUpdate("DELETE FROM buku WHERE id="+id);
+            int i = stmt.executeUpdate("DELETE FROM buku WHERE id_buku="+id);
             if(i == 1){
                 return true;
             }

@@ -31,7 +31,7 @@ public class Buku {
     public Buku(String judul, String pengarang, int id, int jumlahBuku) {
         this.judul = judul;
         this.pengarang = pengarang;
-        this.id = id;
+        this.idKategory = id;
         this.jumlahBuku = jumlahBuku;
     }
 

@@ -5,6 +5,10 @@
  */
 package com.FearlessMans.Perpustakaan;
 
+import com.FearlessMans.Perpustakaan.lib.BukuJavaToDatabase;
+import com.FearlessMans.Perpustakaan.lib.BukuTableModel;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author khosy
@@ -14,8 +18,12 @@ public class crudBuku extends javax.swing.JFrame {
     /**
      * Creates new form crudBuku
      */
+      BukuJavaToDatabase list;
     public crudBuku() {
         initComponents();
+        list = new BukuJavaToDatabase();
+        list.getAllBuku();
+        tab.setModel(new BukuTableModel(list));
     }
 
     /**
@@ -28,15 +36,15 @@ public class crudBuku extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tab = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        hps = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tab.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -44,7 +52,7 @@ public class crudBuku extends javax.swing.JFrame {
                 "No", "Id", "Judul", "Pengarang", "Stok", "Kategori"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tab);
 
         jLabel1.setHorizontalAlignment(jLabel1.CENTER);
         jLabel1.setText("Daftar Buku");
@@ -56,7 +64,12 @@ public class crudBuku extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Hapus Buku");
+        hps.setText("Hapus Buku");
+        hps.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hpsActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Kembali");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -76,7 +89,7 @@ public class crudBuku extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(hps, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -97,7 +110,7 @@ public class crudBuku extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton3))
+                    .addComponent(hps))
                 .addGap(57, 57, 57)
                 .addComponent(jButton4)
                 .addGap(17, 17, 17))
@@ -116,6 +129,30 @@ public class crudBuku extends javax.swing.JFrame {
         this.setVisible(false);
         new MenuAdmin().setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void hpsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hpsActionPerformed
+        int result = 0;
+        Object idValue;
+        
+        boolean rs;
+        int row = tab.getSelectedRow();
+        if (row == -1){
+            JOptionPane.showMessageDialog(this, "Maaf pilih user yang akan di hapus terlebih dahulu!!", "Error", JOptionPane.ERROR_MESSAGE);
+        }else{
+            idValue =  new BukuTableModel(list).getValueAt(row, 0);
+            if (idValue instanceof Integer){
+                result = (Integer) idValue;
+            }else{
+                JOptionPane.showMessageDialog(this, "Maaf terjadi kesalahan", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            rs = new BukuJavaToDatabase().deleteBuku(result);
+            if (rs){
+                JOptionPane.showMessageDialog(this, "Anda sukses menghapus data user!!", "Data Submited", JOptionPane.INFORMATION_MESSAGE);
+                tab.setModel(new BukuTableModel(list));
+            }else
+                JOptionPane.showMessageDialog(this, "Error melakukan penghapusan", "Abort", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_hpsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -153,11 +190,11 @@ public class crudBuku extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton hps;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tab;
     // End of variables declaration//GEN-END:variables
 }

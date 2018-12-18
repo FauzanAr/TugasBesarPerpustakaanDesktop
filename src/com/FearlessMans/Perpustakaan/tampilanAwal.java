@@ -24,7 +24,7 @@ public class tampilanAwal extends javax.swing.JFrame {
         initComponents();
         list = new BukuJavaToDatabase();
         list.getAllBuku();
-        tab.setModel(new BukuTableModel(list));
+        tabCrud.setModel(new BukuTableModel(list));
     }
 
     /**
@@ -39,7 +39,7 @@ public class tampilanAwal extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tab = new javax.swing.JTable();
+        tabCrud = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         login = new javax.swing.JButton();
 
@@ -50,7 +50,7 @@ public class tampilanAwal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Perpustakaan");
 
-        jScrollPane1.setViewportView(tab);
+        jScrollPane1.setViewportView(tabCrud);
 
         jLabel1.setText(" Daftar Buku");
         jLabel1.setHorizontalAlignment(jLabel1.CENTER);
@@ -138,6 +138,6 @@ public class tampilanAwal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JButton login;
-    private javax.swing.JTable tab;
+    private javax.swing.JTable tabCrud;
     // End of variables declaration//GEN-END:variables
 }

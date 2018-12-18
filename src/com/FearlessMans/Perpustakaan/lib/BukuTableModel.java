@@ -43,10 +43,12 @@ public class BukuTableModel extends AbstractTableModel{
     public Object getValueAt(int row, int col) {//"Judul Buku","Pengarang","Id Kategori","Jumlah Peminjaman"
         Object tmp = null;
         if (col == 0){
-            tmp = bukuList.get(row).getJudul();
+            tmp = bukuList.get(row).getId();
         }else if (col == 1){
-            tmp = bukuList.get(row).getPengarang();
+            tmp = bukuList.get(row).getJudul();
         }else if (col == 2){
+            tmp = bukuList.get(row).getPengarang();
+        }else if (col == 3){
             tmp = bukuList.get(row).getJumlahBuku();
         }
         return tmp;

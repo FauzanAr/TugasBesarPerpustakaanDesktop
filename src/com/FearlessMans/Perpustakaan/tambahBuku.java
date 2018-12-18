@@ -31,6 +31,7 @@ public class tambahBuku extends javax.swing.JFrame {
      */
     
     public tambahBuku() {
+        
         this.combo = new comboKategori(); //
             this.combo.tambahKategori("Agama" ,1 );
             this.combo.tambahKategori("Sejarah" ,2 );
@@ -42,8 +43,8 @@ public class tambahBuku extends javax.swing.JFrame {
             this.combo.tambahKategori("Biografi",8);
             this.combo.tambahKategori("Hukum", 9 );
             this.combo.tambahKategori("Geografi",10 );
-            
             initComponents();
+            
     }
       
     
