@@ -9,20 +9,28 @@ package com.FearlessMans.Perpustakaan.lib;
  *
  * @author Ojan
  */
-import java.sql.Array;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableModel;
+import java.util.*;
+
 public class userTableModel extends AbstractTableModel {
+
     private String [] columnNames = {"ID","Nim","Nama","Prodi","Jumlah Peminjaman"};
-    private Object[][] data = {{"11","1741720212","Fauzann","Teknologi Informasi","0"}};
-    //HashSet allDataUser  = (HashSet) new UserJavaToDatabase().getAllUser();
+    private ArrayList <User> userList; 
+    
+    public userTableModel(UserJavaToDatabase list){
+        userList = list.getAllUser();
+    }
+    
+            
     
     @Override
     public int getRowCount() {
-        return data.length;
+        int size;
+        if (userList == null)
+            size = 0;
+        else
+            size = userList.size();
+        return size;
     }
 
     @Override
@@ -31,31 +39,24 @@ public class userTableModel extends AbstractTableModel {
     }
 
     @Override
-    public Object getValueAt(int rowIndex, int columnIndex) {
-        return data[rowIndex][columnIndex];
+    public Object getValueAt(int row, int col) {//"ID","Nim","Nama","Prodi","Jumlah Peminjaman"
+        Object tmp = null;
+        if (col == 0){
+            tmp = userList.get(row).getID();
+        }else if (col == 1){
+            tmp = userList.get(row).getNim();
+        }else if (col == 2){
+            tmp = userList.get(row).getNama();
+        }else if (col == 3){
+            tmp = userList.get(row).getProdi();
+        }else if (col == 4){
+            tmp = userList.get(row).getUserPinjam();
+        }
+        return tmp;
     }
-
-    @Override
-    public Class<?> getColumnClass(int c) {
-        return getValueAt(0, c).getClass();
-    }
-    
-    
 
     @Override
     public String getColumnName(int column) {
         return columnNames[column]; //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    
-
-    
-    @Override
-    public boolean isCellEditable(int row, int column)
-    {
-        if (column == 1 || column == 2){
-            return false;
-        }else
-            return true;
     }
 }

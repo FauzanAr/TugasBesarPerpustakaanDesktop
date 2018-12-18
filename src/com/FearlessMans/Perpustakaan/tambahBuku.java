@@ -21,7 +21,7 @@ import jdk.nashorn.internal.ir.IdentNode;
  * @author khosy
  */
 public class tambahBuku extends javax.swing.JFrame {
-    private ArrayList<Kategori> category = new ArrayList<>();
+    private ArrayList <Kategori> category = new ArrayList<>();
     private ComboBoxModel<String> comboModel;
     private comboKategori combo;
     private DefaultComboBoxModel defCom;
@@ -38,7 +38,7 @@ public class tambahBuku extends javax.swing.JFrame {
             this.combo.tambahKategori("Teknologi", 4 );
             this.combo.tambahKategori("Ilmu Pengetahuan Alam", 5 );
             this.combo.tambahKategori("Bahasa Inggris", 6);
-            this.combo.tambahKategori( "Matematika", 7);
+            this.combo.tambahKategori("Matematika", 7);
             this.combo.tambahKategori("Biografi",8);
             this.combo.tambahKategori("Hukum", 9 );
             this.combo.tambahKategori("Geografi",10 );

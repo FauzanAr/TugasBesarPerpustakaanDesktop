@@ -39,6 +39,7 @@ public class tampilanAwal extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTextArea1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Perpustakaan");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

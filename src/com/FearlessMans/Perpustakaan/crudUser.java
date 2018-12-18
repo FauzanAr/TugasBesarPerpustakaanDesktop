@@ -25,11 +25,13 @@ public class crudUser extends javax.swing.JFrame {
     /**
      * Creates new form crudUser
      */
+    UserJavaToDatabase list;
 
     public crudUser() {
         initComponents();
-        
-        jTable1.setModel(new userTableModel());
+        list = new UserJavaToDatabase();
+        list.getAllUser();
+        jTable1.setModel(new userTableModel(list));
         
     }
 
@@ -67,6 +69,11 @@ public class crudUser extends javax.swing.JFrame {
         jButton2.setText("Edit Mahasiswa");
 
         jButton3.setText("Hapus Mahasiswa");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Kembali");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -124,6 +131,10 @@ public class crudUser extends javax.swing.JFrame {
         this.setVisible(false);
         new MenuAdmin().setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments

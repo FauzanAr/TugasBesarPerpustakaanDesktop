@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashSet;
 import java.util.Set;
-
+import java.util.*;
 /**
  *
  * @author fauzan
@@ -58,13 +58,13 @@ public class UserJavaToDatabase {
     }
 
 
-    public Set getAllUser() {
+    public ArrayList getAllUser() {
         Connection koneksi = Koneksi.buka_koneksi();
         try {
             Statement stmt = koneksi.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM user");
             
-            Set users = new HashSet();
+            ArrayList users = new ArrayList();
             
             while (rs.next()){
                 User user = extractUserFromResultSet(rs);
