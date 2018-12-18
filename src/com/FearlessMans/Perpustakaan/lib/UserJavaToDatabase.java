@@ -23,7 +23,7 @@ public class UserJavaToDatabase {
         Connection koneksi = Koneksi.buka_koneksi();
         try {
             Statement stmt = koneksi.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM user WHERE id ="+id);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM user WHERE id_user_perpus ="+id);
             
             if (rs.next()){
                 User user = new User();
@@ -162,7 +162,7 @@ public class UserJavaToDatabase {
         
         try {
             Statement stmt = koneksi.createStatement();
-            int i = stmt.executeUpdate("DELETE FROM user WHERE id="+id);
+            int i = stmt.executeUpdate("DELETE FROM user WHERE id_user_perpus="+id);
             if(i == 1){
                 return true;
             }
