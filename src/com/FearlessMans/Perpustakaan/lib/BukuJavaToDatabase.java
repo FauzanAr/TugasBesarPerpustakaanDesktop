@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -47,13 +48,13 @@ public class BukuJavaToDatabase {
         return buku;
     }
     
-    public Set getAllBuku() {
+    public ArrayList getAllBuku() {
         Connection koneksi = Koneksi.buka_koneksi();
         try {
             Statement stmt = koneksi.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM buku");
             
-            Set bukuBuku = new HashSet();
+            ArrayList bukuBuku = new ArrayList();
             
             while (rs.next()){
                 Buku buku = extractUserFromResultSet(rs);

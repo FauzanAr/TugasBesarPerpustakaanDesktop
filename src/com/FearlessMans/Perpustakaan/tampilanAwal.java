@@ -5,6 +5,10 @@
  */
 package com.FearlessMans.Perpustakaan;
 
+import com.FearlessMans.Perpustakaan.lib.BukuJavaToDatabase;
+import com.FearlessMans.Perpustakaan.lib.BukuTableModel;
+import static java.util.Collections.list;
+
 /**
  *
  * @author khosy
@@ -14,7 +18,13 @@ public class tampilanAwal extends javax.swing.JFrame {
     /**
      * Creates new form tampilanAwal
      */
+    BukuJavaToDatabase list;
+    
     public tampilanAwal() {
+        list = new BukuJavaToDatabase();
+        list.getAllBuku();
+        tab.setModel(new BukuTableModel(list));
+        
         initComponents();
     }
 
@@ -30,7 +40,7 @@ public class tampilanAwal extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tab = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         login = new javax.swing.JButton();
 
@@ -41,38 +51,7 @@ public class tampilanAwal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Perpustakaan");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "No", "Id Buku", "Judul", "Pengarang", "Stok", "Kategori"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tab);
 
         jLabel1.setText(" Daftar Buku");
         jLabel1.setHorizontalAlignment(jLabel1.CENTER);
@@ -158,8 +137,8 @@ public class tampilanAwal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JButton login;
+    private javax.swing.JTable tab;
     // End of variables declaration//GEN-END:variables
 }
