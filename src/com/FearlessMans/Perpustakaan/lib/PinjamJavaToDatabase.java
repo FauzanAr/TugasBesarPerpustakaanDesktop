@@ -156,7 +156,7 @@ public class PinjamJavaToDatabase {
         
         try {
             Statement stmt = koneksi.createStatement();
-            int i = stmt.executeUpdate("DELETE FROM buku WHERE id_peminjaman="+id);
+            int i = stmt.executeUpdate("DELETE FROM peminjaman WHERE id_peminjaman="+id);
             if(i == 1){
                 return true;
             }

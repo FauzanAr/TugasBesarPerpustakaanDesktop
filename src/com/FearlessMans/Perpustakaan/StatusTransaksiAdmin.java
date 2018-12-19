@@ -5,17 +5,30 @@
  */
 package com.FearlessMans.Perpustakaan;
 
+import com.FearlessMans.Perpustakaan.lib.Buku;
+import com.FearlessMans.Perpustakaan.lib.PeminjamanTableModel;
+import com.FearlessMans.Perpustakaan.lib.PinjamJavaToDatabase;
+import com.FearlessMans.Perpustakaan.lib.User;
+import com.FearlessMans.Perpustakaan.lib.UserJavaToDatabase;
+import com.FearlessMans.Perpustakaan.lib.BukuJavaToDatabase;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author khosy
  */
 public class StatusTransaksiAdmin extends javax.swing.JFrame {
-
+    PinjamJavaToDatabase list;
+    User user;
+    Buku buku;
     /**
      * Creates new form StatusTransaksiAdmin
      */
     public StatusTransaksiAdmin() {
         initComponents();
+        list = new PinjamJavaToDatabase();
+        list.getAllPinjamAdmin();
+        jTable1.setModel(new PeminjamanTableModel(list));
     }
 
     /**
@@ -35,6 +48,7 @@ public class StatusTransaksiAdmin extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -77,6 +91,13 @@ public class StatusTransaksiAdmin extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        jButton1.setText("Hapus");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -87,13 +108,17 @@ public class StatusTransaksiAdmin extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(172, 172, 172))
-                    .addComponent(kembali, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(308, 308, 308)
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(kembali))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel3)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel2)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addGap(32, 32, 32))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,7 +134,9 @@ public class StatusTransaksiAdmin extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(kembali)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(kembali)
+                    .addComponent(jButton1))
                 .addGap(20, 20, 20))
         );
 
@@ -121,6 +148,38 @@ public class StatusTransaksiAdmin extends javax.swing.JFrame {
         this.setVisible(false);
         new MenuAdmin().setVisible(true);
     }//GEN-LAST:event_kembaliActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        User user = new User();
+        Buku buku = new Buku();
+        Object idVal, idUser, idBuku;//User 1 Buku 2
+        boolean rs, rsB, rsU;
+        int row = jTable1.getSelectedRow();
+        if (row > -1){
+            idVal = new PeminjamanTableModel(list).getValueAt(row, 0);
+            int id = (Integer) idVal;
+            idUser = new PeminjamanTableModel(list).getValueAt(row, 1);
+            int userId = (Integer) idUser;
+            idBuku = new PeminjamanTableModel(list).getValueAt(row, 2);
+            int bukuId = (Integer) idBuku;
+            user = new UserJavaToDatabase().getUser(userId);
+            buku = new BukuJavaToDatabase().getBuku(bukuId);
+            int jumlahPinjam = user.getUserPinjam();
+            jumlahPinjam = jumlahPinjam-1;
+            user.setUserPinjam(jumlahPinjam);
+            rsU = new UserJavaToDatabase().updateUser(user);
+            int jumlahBuku = buku.getJumlahBuku();
+            jumlahBuku = jumlahBuku+1;
+            buku.setJumlahBuku(jumlahBuku);
+            rsB = new BukuJavaToDatabase().updateBuku(buku);
+            rs = new PinjamJavaToDatabase().deletePinjam(id);
+            if (rs&&rsB&&rsU){
+                JOptionPane.showMessageDialog(this, "Sukses", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+                jTable1.setModel(new PeminjamanTableModel(list));
+            }
+        }else
+            JOptionPane.showMessageDialog(this, "Maaf pilih dahulu transaksi yang akan di hapus", "Error", JOptionPane.ERROR_MESSAGE);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -158,6 +217,7 @@ public class StatusTransaksiAdmin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -19,6 +19,10 @@ public class PeminjamanTableModel extends AbstractTableModel {
         pinjamanList = list.getAllPinjamUser(id);
     }
     
+    public PeminjamanTableModel(PinjamJavaToDatabase list){
+        pinjamanList = list.getAllPinjamAdmin();
+    }
+    
     
     @Override
     public int getRowCount() {
