@@ -6,7 +6,10 @@
 package com.FearlessMans.Perpustakaan.lib;
 
 import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -16,7 +19,7 @@ import java.util.ArrayList;
  */
 public class PinjamJavaToDatabase {
      
-    public Buku getBuku(int id) {
+    public Peminjaman getPinjam(int id) {
         Connection koneksi = Koneksi.buka_koneksi();
         try {
             Statement stmt = koneksi.createStatement();
@@ -25,7 +28,7 @@ public class PinjamJavaToDatabase {
             if (rs.next()){
 //                Buku buku = new Buku();
                 
-                return extractUserFromResultSet(rs);
+                return extractPinjamFromResultSet(rs);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -34,44 +37,64 @@ public class PinjamJavaToDatabase {
     }
     
     
-    private buku extractUserFromResultSet(ResultSet rs) throws SQLException{
-        Buku buku = new Buku();
+    private Peminjaman extractPinjamFromResultSet(ResultSet rs) throws SQLException{
+        Peminjaman pinjam = new Peminjaman();
         
-        buku.setId(rs.getInt("id_buku"));
-        buku.setJudul(rs.getString("judul_buku"));
-        buku.setPengarang(rs.getString("pengarang_buku"));
-        buku.setIdKategory(rs.getInt("id_category_buku"));
-        buku.setJumlahBuku(rs.getInt("jumlah_buku"));
-        return buku;
+        pinjam.setIdPeminjaman(rs.getInt("id_peminjaman"));
+        pinjam.setIdUserPerpus(rs.getInt("id_user_perpustakaan"));
+        pinjam.setIdBuku(rs.getInt("id_buku"));
+        pinjam.setTanggalPinjam(rs.getDate("tanggal_pinjam"));
+        pinjam.setTanggalKembali(rs.getDate("tanggal_kembali"));
+        return pinjam;
     }
     
-    public ArrayList getAllBuku() {
+    public ArrayList getAllPinjamAdmin() {
         Connection koneksi = Koneksi.buka_koneksi();
         try {
             Statement stmt = koneksi.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM peminjaman");
             
-            ArrayList bukuBuku = new ArrayList();
+            ArrayList pinjamList = new ArrayList();
             
             while (rs.next()){
-                Buku buku = extractUserFromResultSet(rs);
-                bukuBuku.add(buku);
+                Peminjaman pinjam = extractPinjamFromResultSet(rs);
+                pinjamList.add(pinjam);
             }
-            return bukuBuku;
+            return pinjamList;
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
     
-    public boolean insertBuku(Buku buku) {
+        public ArrayList getAllPinjamUser(int user) {
         Connection koneksi = Koneksi.buka_koneksi();
         try {
-            PreparedStatement ps = koneksi.prepareStatement("INSERT INTO buku(judul_buku, pengarang_buku, id_category_buku, jumlah_buku) VALUES (?,?,?,?)");
-            ps.setString(1, buku.getJudul());
-            ps.setString(2, buku.getPengarang());
-            ps.setInt(3, buku.getIdKategory());
-            ps.setInt(4, buku.getJumlahBuku());
+            Statement stmt = koneksi.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM peminjaman WHERE id_user_perpustakaan="+user);
+            
+            ArrayList pinjamList = new ArrayList();
+            
+            while (rs.next()){
+                Peminjaman pinjam = extractPinjamFromResultSet(rs);
+                pinjamList.add(pinjam);
+            }
+            return pinjamList;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+  
+    public boolean insertPinjam(Peminjaman pinjam) {
+        Connection koneksi = Koneksi.buka_koneksi();
+        try {
+            PreparedStatement ps = koneksi.prepareStatement("INSERT INTO peminjaman(id_user_perpustakaan, id_buku, tanggal_pinjam, tanggal_kembali) VALUES (?,?,?,?)");
+            ps.setInt(1, pinjam.getIdUserPerpus());
+            ps.setInt(2, pinjam.getIdBuku());
+            ps.setDate(3, (Date) pinjam.getTanggalPinjam());
+            ps.setDate(4, (Date) pinjam.getTanggalKembali());
             
             int i = ps.executeUpdate();
             
@@ -107,18 +130,18 @@ public class PinjamJavaToDatabase {
 //    }
 
 
-//    public boolean deleteBuku(int id) {
-//        Connection koneksi = Koneksi.buka_koneksi();
-//        
-//        try {
-//            Statement stmt = koneksi.createStatement();
-//            int i = stmt.executeUpdate("DELETE FROM buku WHERE id_buku="+id);
-//            if(i == 1){
-//                return true;
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return false;
-//    }
+    public boolean deletePinjam(int id) {
+        Connection koneksi = Koneksi.buka_koneksi();
+        
+        try {
+            Statement stmt = koneksi.createStatement();
+            int i = stmt.executeUpdate("DELETE FROM buku WHERE id_peminjaman="+id);
+            if(i == 1){
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
