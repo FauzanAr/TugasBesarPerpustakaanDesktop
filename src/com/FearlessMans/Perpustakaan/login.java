@@ -17,11 +17,13 @@ import javax.swing.JOptionPane;
 public class login extends javax.swing.JFrame {
     UserJavaToDatabase DAOUser = new UserJavaToDatabase();
     UserJavaToDatabase DAOAdmin = new UserJavaToDatabase();
+    private User activeUser;
     /**
      * Creates new form NewJFrame
      */
     public login() {
         initComponents();
+        activeUser = new User();
         setResizable(false);
     }
 
@@ -122,18 +124,26 @@ public class login extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+//    public void setActiveUser(User user){
+//        this.activeUser = user;
+//    }
+    
+    public User getActiveUser(){
+        return activeUser;
+    }
+    
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
         String password = String.valueOf(jPasswordField1.getPassword());
         String username = String.valueOf(pass.getText());
-        User dataUser = DAOUser.getUserByUserNameAndPassword(username);
+        activeUser = DAOUser.getUserByUserNameAndPassword(username);
         Admin dataAdmin = DAOAdmin.getAdminByUserNameAndPassword(username, password);
         if(!password.equals("") && !username.equals("")) {
             if (password.length()>0 && username.length()>0){
             okButton.setEnabled(true);
-            if(dataUser != null){
+            if(activeUser != null){
                 this.setVisible(false);
-                new menuUser().setVisible(true);
+                menuUser mnuser = new menuUser(this.activeUser);
+                mnuser.setVisible(true);
             }else if(dataAdmin != null){
                 this.setVisible(false);
                 new MenuAdmin().setVisible(true);

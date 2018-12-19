@@ -4,19 +4,25 @@
  * and open the template in the editor.
  */
 package com.FearlessMans.Perpustakaan;
-
 /**
  *
  * @author khosy
  */
+import com.FearlessMans.Perpustakaan.lib.User;
 public class menuUser extends javax.swing.JFrame {
-
+    
+    final User userActive;
     /**
      * Creates new form MenuUser
      */
-    public menuUser() {
+    public menuUser(User user) {
+        this.userActive = user;
+        
         initComponents();
+        jLabel2.setText(userActive.getNama());
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -101,15 +107,19 @@ public class menuUser extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    public User getActiveUser(){
+        return userActive;
+    }
     private void peminjamanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_peminjamanActionPerformed
         this.setVisible(false);
-        new Peminjaman().setVisible(true);
+        Peminjaman peminjaman = new Peminjaman(this.userActive);
+        peminjaman.setVisible(true);
     }//GEN-LAST:event_peminjamanActionPerformed
 
     private void transaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transaksiActionPerformed
         this.setVisible(false);
-        new StatusTransaksiUser().setVisible(true);
+        StatusTransaksiUser status = new StatusTransaksiUser(this.userActive);
+        status.setVisible(true);
     }//GEN-LAST:event_transaksiActionPerformed
 
     private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
@@ -148,7 +158,7 @@ public class menuUser extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new menuUser().setVisible(true);
+                new menuUser(null).setVisible(true);
             }
         });
     }

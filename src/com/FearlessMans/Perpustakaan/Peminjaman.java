@@ -5,17 +5,20 @@
  */
 package com.FearlessMans.Perpustakaan;
 
+import com.FearlessMans.Perpustakaan.lib.User;
+
 /**
  *
  * @author khosy
  */
 public class Peminjaman extends javax.swing.JFrame {
-
+    User userActive;
     /**
      * Creates new form Peminjaman
      */
-    public Peminjaman() {
+    public Peminjaman(User user) {
         initComponents();
+        this.userActive = user;
     }
 
     /**
@@ -101,7 +104,8 @@ public class Peminjaman extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.setVisible(false);
-        new menuUser().setVisible(true);
+        menuUser menu = new menuUser(this.userActive);
+        menu.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -134,7 +138,7 @@ public class Peminjaman extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Peminjaman().setVisible(true);
+                new Peminjaman(null).setVisible(true);
             }
         });
     }

@@ -5,17 +5,20 @@
  */
 package com.FearlessMans.Perpustakaan;
 
+import com.FearlessMans.Perpustakaan.lib.User;
+
 /**
  *
  * @author khosy
  */
 public class StatusTransaksiUser extends javax.swing.JFrame {
-
+    User activeUser;
     /**
      * Creates new form StatusTransaksi
      */
-    public StatusTransaksiUser() {
+    public StatusTransaksiUser(User user) {
         initComponents();
+        this.activeUser = user;
     }
 
     /**
@@ -121,7 +124,8 @@ public class StatusTransaksiUser extends javax.swing.JFrame {
 
     private void kembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kembaliActionPerformed
         this.setVisible(false);
-        new menuUser().setVisible(true);
+        menuUser menu = new menuUser(this.activeUser);
+        menu.setVisible(true);
     }//GEN-LAST:event_kembaliActionPerformed
 
     /**
@@ -155,7 +159,7 @@ public class StatusTransaksiUser extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new StatusTransaksiUser().setVisible(true);
+                new StatusTransaksiUser(null).setVisible(true);
             }
         });
     }
