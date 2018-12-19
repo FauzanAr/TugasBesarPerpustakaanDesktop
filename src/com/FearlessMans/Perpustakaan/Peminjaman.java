@@ -5,7 +5,10 @@
  */
 package com.FearlessMans.Perpustakaan;
 
+import com.FearlessMans.Perpustakaan.lib.BukuJavaToDatabase;
+import com.FearlessMans.Perpustakaan.lib.BukuTableModel;
 import com.FearlessMans.Perpustakaan.lib.User;
+import static java.util.Collections.list;
 
 /**
  *
@@ -16,9 +19,13 @@ public class Peminjaman extends javax.swing.JFrame {
     /**
      * Creates new form Peminjaman
      */
+    BukuJavaToDatabase list;
     public Peminjaman(User user) {
         initComponents();
         this.userActive = user;
+        list = new BukuJavaToDatabase();
+        list.getAllBuku();
+        tab.setModel(new BukuTableModel(list));
     }
 
     /**
@@ -32,7 +39,7 @@ public class Peminjaman extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tab = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
@@ -40,7 +47,7 @@ public class Peminjaman extends javax.swing.JFrame {
 
         jLabel1.setText("PEMINJAMAN BUKU");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tab.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -51,7 +58,7 @@ public class Peminjaman extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tab);
 
         jButton1.setText("Pinjam");
 
@@ -148,6 +155,6 @@ public class Peminjaman extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tab;
     // End of variables declaration//GEN-END:variables
 }
