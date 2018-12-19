@@ -145,6 +145,10 @@ public class Peminjaman extends javax.swing.JFrame {
                         rs = new UserJavaToDatabase().updateUser(userActive);
                         bukuSekarang = new BukuJavaToDatabase().getBuku(value);
                         rsB = new BukuJavaToDatabase().updateBuku(bukuSekarang);
+                        if (rs && rsB){
+                            JOptionPane.showMessageDialog(this, "Sukses Meminjam", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+                            PeminjamanLib peminjam = new PeminjamanLib(userActive.getID(), bukuSekarang.getId(), tanggalPinjam, tanggalKembali)
+                        }
                     }else{
                         JOptionPane.showMessageDialog(this, "Maaf Kuota Peminjaman Anda Lebih Dari 3 !!", "Error", JOptionPane.ERROR_MESSAGE);
                     }

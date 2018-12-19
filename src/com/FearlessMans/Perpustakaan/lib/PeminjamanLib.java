@@ -18,6 +18,15 @@ public class PeminjamanLib {
         
     }
 
+    public PeminjamanLib(int idUserPerpus, int idBuku, Date tanggalPinjam, Date tanggalKembali) {
+        this.idUserPerpus = idUserPerpus;
+        this.idBuku = idBuku;
+        this.tanggalPinjam = tanggalPinjam;
+        this.tanggalKembali = tanggalKembali;
+    }
+    
+    
+
     public int getIdPeminjaman() {
         return idPeminjaman;
     }
