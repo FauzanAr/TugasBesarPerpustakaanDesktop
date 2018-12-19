@@ -8,9 +8,12 @@ package com.FearlessMans.Perpustakaan;
 import com.FearlessMans.Perpustakaan.lib.BukuJavaToDatabase;
 import com.FearlessMans.Perpustakaan.lib.BukuTableModel;
 import com.FearlessMans.Perpustakaan.lib.User;
+import com.FearlessMans.Perpustakaan.lib.UserJavaToDatabase;
 import com.FearlessMans.Perpustakaan.lib.PeminjamanLib;
 import com.FearlessMans.Perpustakaan.lib.PinjamJavaToDatabase;
+import com.FearlessMans.Perpustakaan.lib.Buku;
 import static java.util.Collections.list;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,6 +21,7 @@ import static java.util.Collections.list;
  */
 public class Peminjaman extends javax.swing.JFrame {
     User userActive;
+    Buku bukuSekarang;
     
     /**
      * Creates new form PeminjamanLib
@@ -25,6 +29,7 @@ public class Peminjaman extends javax.swing.JFrame {
     BukuJavaToDatabase list;
     public Peminjaman(User user) {
         initComponents();
+        bukuSekarang = new Buku();
         this.userActive = user;
         list = new BukuJavaToDatabase();
         list.getAllBuku();
@@ -64,6 +69,11 @@ public class Peminjaman extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tab);
 
         jButton1.setText("Pinjam");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Kembali");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -117,6 +127,34 @@ public class Peminjaman extends javax.swing.JFrame {
         menuUser menu = new menuUser(this.userActive);
         menu.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Object idValue,totalValue;
+        boolean rs,rsB;
+        int row = tab.getSelectedRow();
+        if (row >= 0){
+            totalValue = new BukuTableModel(list).getValueAt(row, 3);
+            if (totalValue instanceof Integer){
+                int totValue = (Integer) totalValue;
+                if(totValue != 0){
+                    if(userActive.getUserPinjam()<=3){
+                        idValue = new BukuTableModel(list).getValueAt(row, 0);
+                        int value = (Integer) idValue;
+                        int userPinjam =+ userActive.getUserPinjam();
+                        userActive.setUserPinjam(userPinjam);
+                        rs = new UserJavaToDatabase().updateUser(userActive);
+                        bukuSekarang = new BukuJavaToDatabase().getBuku(value);
+                        rsB = new BukuJavaToDatabase().updateBuku(bukuSekarang);
+                    }else{
+                        JOptionPane.showMessageDialog(this, "Maaf Kuota Peminjaman Anda Lebih Dari 3 !!", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(this, "Maaf Stok Habis", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }else
+            JOptionPane.showMessageDialog(this, "Maaf piih buku dahulu", "Error", JOptionPane.ERROR_MESSAGE);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
