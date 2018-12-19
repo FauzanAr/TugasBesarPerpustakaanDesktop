@@ -12,7 +12,10 @@ import com.FearlessMans.Perpustakaan.lib.UserJavaToDatabase;
 import com.FearlessMans.Perpustakaan.lib.PeminjamanLib;
 import com.FearlessMans.Perpustakaan.lib.PinjamJavaToDatabase;
 import com.FearlessMans.Perpustakaan.lib.Buku;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import static java.util.Collections.list;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -48,8 +51,8 @@ public class Peminjaman extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tab = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        pinjamButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,17 +71,17 @@ public class Peminjaman extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tab);
 
-        jButton1.setText("Pinjam");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         jButton2.setText("Kembali");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
+            }
+        });
+
+        pinjamButton.setText("Pinjam");
+        pinjamButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pinjamButtonActionPerformed(evt);
             }
         });
 
@@ -98,7 +101,7 @@ public class Peminjaman extends javax.swing.JFrame {
                                 .addComponent(jLabel1))
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jButton1)
+                                .addComponent(pinjamButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton2)))
                         .addGap(0, 138, Short.MAX_VALUE)))
@@ -113,8 +116,8 @@ public class Peminjaman extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(pinjamButton))
                 .addContainerGap(68, Short.MAX_VALUE))
         );
 
@@ -128,7 +131,9 @@ public class Peminjaman extends javax.swing.JFrame {
         menu.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void pinjamButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pinjamButtonActionPerformed
+        long millis = System.currentTimeMillis();  
+        java.sql.Date date = new java.sql.Date(millis);  
         Object idValue,totalValue;
         boolean rs,rsB;
         int row = tab.getSelectedRow();
@@ -137,17 +142,26 @@ public class Peminjaman extends javax.swing.JFrame {
             if (totalValue instanceof Integer){
                 int totValue = (Integer) totalValue;
                 if(totValue != 0){
-                    if(userActive.getUserPinjam()<=3){
+                    if(userActive.getUserPinjam()<3){
                         idValue = new BukuTableModel(list).getValueAt(row, 0);
                         int value = (Integer) idValue;
-                        int userPinjam =+ userActive.getUserPinjam();
+                        int userPinjam = userActive.getUserPinjam();
+                        userPinjam = userPinjam + 1;
+                        totValue = totValue-1;
                         userActive.setUserPinjam(userPinjam);
                         rs = new UserJavaToDatabase().updateUser(userActive);
                         bukuSekarang = new BukuJavaToDatabase().getBuku(value);
+                        bukuSekarang.setJumlahBuku(totValue);
                         rsB = new BukuJavaToDatabase().updateBuku(bukuSekarang);
                         if (rs && rsB){
-                            JOptionPane.showMessageDialog(this, "Sukses Meminjam", "Sukses", JOptionPane.INFORMATION_MESSAGE);
-                            PeminjamanLib peminjam = new PeminjamanLib(userActive.getID(), bukuSekarang.getId(), tanggalPinjam, tanggalKembali)
+                            PeminjamanLib peminjam = new PeminjamanLib(userActive.getID(), bukuSekarang.getId(), date, date);
+                            boolean RS = new PinjamJavaToDatabase().insertPinjam(peminjam);
+                            if (RS){
+                                JOptionPane.showMessageDialog(this, "Sukses", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+                                tab.setModel(new BukuTableModel(list));
+                            }else{
+                                JOptionPane.showMessageDialog(this, "Maaf tidak bisa di tambahkan", "Error", JOptionPane.ERROR_MESSAGE);
+                            }
                         }
                     }else{
                         JOptionPane.showMessageDialog(this, "Maaf Kuota Peminjaman Anda Lebih Dari 3 !!", "Error", JOptionPane.ERROR_MESSAGE);
@@ -158,7 +172,7 @@ public class Peminjaman extends javax.swing.JFrame {
             }
         }else
             JOptionPane.showMessageDialog(this, "Maaf piih buku dahulu", "Error", JOptionPane.ERROR_MESSAGE);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_pinjamButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -196,10 +210,10 @@ public class Peminjaman extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton pinjamButton;
     private javax.swing.JTable tab;
     // End of variables declaration//GEN-END:variables
 }

@@ -137,7 +137,7 @@ public class UserJavaToDatabase {
         Connection koneksi = Koneksi.buka_koneksi();
         
         try {
-            PreparedStatement ps = koneksi.prepareStatement("UPDATE user SET nim_user_perpus=?, nama_user_perpus=?, prodi_user_perpus=?, user_pinjam=? WHERE id=?");
+            PreparedStatement ps = koneksi.prepareStatement("UPDATE user SET nim_user_perpus=?, nama_user_perpus=?, prodi_user_perpus=?, user_pinjam=?, password_user_perpus=? WHERE id_user_perpus=?");
             ps.setString(1, user.getNim());
             ps.setString(2, user.getNama());
             ps.setString(3, user.getProdi());

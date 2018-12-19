@@ -24,7 +24,7 @@ public class BukuJavaToDatabase {
         Connection koneksi = Koneksi.buka_koneksi();
         try {
             Statement stmt = koneksi.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM buku WHERE id ="+id);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM buku WHERE id_buku="+id);
             
             if (rs.next()){
                 Buku buku = new Buku();
@@ -91,12 +91,12 @@ public class BukuJavaToDatabase {
         Connection koneksi = Koneksi.buka_koneksi();
         
         try {
-            PreparedStatement ps = koneksi.prepareStatement("UPDATE buku SET judul_buku=?, pengarang_buku=?, id_category_buku=?, jumlah_buku=? WHERE id=?");
+            PreparedStatement ps = koneksi.prepareStatement("UPDATE buku SET judul_buku=?, pengarang_buku=?, id_category_buku=?, jumlah_buku=? WHERE id_buku=?");
             ps.setString(1, buku.getJudul());
             ps.setString(2, buku.getPengarang());
             ps.setInt(3, buku.getIdKategory());
-            ps.setInt   (4, buku.getJumlahBuku());
-            ps.setInt   (5, buku.getId());
+            ps.setInt(4, buku.getJumlahBuku());
+            ps.setInt(5, buku.getId());
             
             int i = ps.executeUpdate();
             
