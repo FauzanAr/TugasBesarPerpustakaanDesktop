@@ -26,7 +26,7 @@ public class PinjamJavaToDatabase {
             ResultSet rs = stmt.executeQuery("SELECT * FROM peminjaman WHERE id_user_perpustakaan ="+id);
             
             if (rs.next()){
-//                Buku buku = new Buku();
+                 PeminjamanLib pinjam = new PeminjamanLib();
                 
                 return extractPinjamFromResultSet(rs);
             }
@@ -106,6 +106,27 @@ public class PinjamJavaToDatabase {
         }
         return false;
     }
+    
+     public PeminjamanLib getJoinPinjam(int id) {
+        Connection koneksi = Koneksi.buka_koneksi();
+        try {
+            Statement stmt = koneksi.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * ");
+            
+            if (rs.next()){
+                 PeminjamanLib pinjam = new PeminjamanLib();
+                
+                return extractPinjamFromResultSet(rs);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+       return null; 
+    }
+    
+    
+    
+    
 
 //    public boolean updateBuku(Buku buku) {
 //        Connection koneksi = Koneksi.buka_koneksi();
