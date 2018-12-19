@@ -19,7 +19,7 @@ import java.util.ArrayList;
  */
 public class PinjamJavaToDatabase {
      
-    public Peminjaman getPinjam(int id) {
+    public PeminjamanLib getPinjam(int id) {
         Connection koneksi = Koneksi.buka_koneksi();
         try {
             Statement stmt = koneksi.createStatement();
@@ -37,8 +37,8 @@ public class PinjamJavaToDatabase {
     }
     
     
-    private Peminjaman extractPinjamFromResultSet(ResultSet rs) throws SQLException{
-        Peminjaman pinjam = new Peminjaman();
+    private PeminjamanLib extractPinjamFromResultSet(ResultSet rs) throws SQLException{
+        PeminjamanLib pinjam = new PeminjamanLib();
         
         pinjam.setIdPeminjaman(rs.getInt("id_peminjaman"));
         pinjam.setIdUserPerpus(rs.getInt("id_user_perpustakaan"));
@@ -57,7 +57,7 @@ public class PinjamJavaToDatabase {
             ArrayList pinjamList = new ArrayList();
             
             while (rs.next()){
-                Peminjaman pinjam = extractPinjamFromResultSet(rs);
+                PeminjamanLib pinjam = extractPinjamFromResultSet(rs);
                 pinjamList.add(pinjam);
             }
             return pinjamList;
@@ -76,7 +76,7 @@ public class PinjamJavaToDatabase {
             ArrayList pinjamList = new ArrayList();
             
             while (rs.next()){
-                Peminjaman pinjam = extractPinjamFromResultSet(rs);
+                PeminjamanLib pinjam = extractPinjamFromResultSet(rs);
                 pinjamList.add(pinjam);
             }
             return pinjamList;
@@ -87,7 +87,7 @@ public class PinjamJavaToDatabase {
     }
     
   
-    public boolean insertPinjam(Peminjaman pinjam) {
+    public boolean insertPinjam(PeminjamanLib pinjam) {
         Connection koneksi = Koneksi.buka_koneksi();
         try {
             PreparedStatement ps = koneksi.prepareStatement("INSERT INTO peminjaman(id_user_perpustakaan, id_buku, tanggal_pinjam, tanggal_kembali) VALUES (?,?,?,?)");

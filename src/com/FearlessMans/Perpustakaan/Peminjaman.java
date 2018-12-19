@@ -8,6 +8,8 @@ package com.FearlessMans.Perpustakaan;
 import com.FearlessMans.Perpustakaan.lib.BukuJavaToDatabase;
 import com.FearlessMans.Perpustakaan.lib.BukuTableModel;
 import com.FearlessMans.Perpustakaan.lib.User;
+import com.FearlessMans.Perpustakaan.lib.PeminjamanLib;
+import com.FearlessMans.Perpustakaan.lib.PinjamJavaToDatabase;
 import static java.util.Collections.list;
 
 /**
@@ -16,8 +18,9 @@ import static java.util.Collections.list;
  */
 public class Peminjaman extends javax.swing.JFrame {
     User userActive;
+    
     /**
-     * Creates new form Peminjaman
+     * Creates new form PeminjamanLib
      */
     BukuJavaToDatabase list;
     public Peminjaman(User user) {

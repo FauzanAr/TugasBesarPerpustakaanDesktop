@@ -13,7 +13,6 @@ import javax.swing.table.AbstractTableModel;
  * @author khosy
  */
 public class BukuTableModel extends AbstractTableModel{
- 
     private String [] columnNames = {"Kode Buku","Judul Buku","Pengarang","Jumlah Buku"};
     private ArrayList <Buku> bukuList; 
     

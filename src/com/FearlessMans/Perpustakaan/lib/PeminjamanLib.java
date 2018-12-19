@@ -10,11 +10,11 @@ import java.util.Date;
  *
  * @author Ojan
  */
-public class Peminjaman {
+public class PeminjamanLib {
     private int idPeminjaman, idUserPerpus, idBuku;
     private Date tanggalPinjam, tanggalKembali;
     
-    public Peminjaman(){
+    public PeminjamanLib(){
         
     }
 

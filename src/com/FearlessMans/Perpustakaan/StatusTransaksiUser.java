@@ -6,6 +6,9 @@
 package com.FearlessMans.Perpustakaan;
 
 import com.FearlessMans.Perpustakaan.lib.User;
+import com.FearlessMans.Perpustakaan.lib.PeminjamanLib;
+import com.FearlessMans.Perpustakaan.lib.PinjamJavaToDatabase;
+import com.FearlessMans.Perpustakaan.lib.PeminjamanTableModel;
 
 /**
  *
@@ -13,12 +16,16 @@ import com.FearlessMans.Perpustakaan.lib.User;
  */
 public class StatusTransaksiUser extends javax.swing.JFrame {
     User activeUser;
+    PinjamJavaToDatabase list;
     /**
      * Creates new form StatusTransaksi
      */
     public StatusTransaksiUser(User user) {
         initComponents();
         this.activeUser = user;
+        list = new PinjamJavaToDatabase();
+        list.getAllPinjamUser(activeUser.getID());
+        jTable1.setModel(new PeminjamanTableModel(list, activeUser.getID()));
     }
 
     /**
